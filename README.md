@@ -1,4 +1,4 @@
-# heyazhar-prefect-usage — README
+# Prefect Usage
 
 A compact, hands-on repository with small Prefect example flows showing basics, sync vs async patterns, retry & logging patterns, and simple deployment/parameterized-deployment examples. Use this as a learning playground to try out local runs, `prefect` deploys, and triggering deployments programmatically.
 
