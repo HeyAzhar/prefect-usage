@@ -10,11 +10,10 @@ A compact, hands-on repository with small Prefect example flows showing basics, 
 - [Prerequisites](#prerequisites)
 - [Install](#install)
 - [Directory structure (quick)](#directory-structure-quick)
-- [Quickstart — run examples locally](#quickstart---run-examples-locally)
+- [Quickstart — run examples locally](#quickstart)
 - [Key concepts demonstrated](#key-concepts-demonstrated)
 - [Deployments & parameterized runs](#deployments--parameterized-runs)
 - [Troubleshooting & tips](#troubleshooting--tips)
-- [Contributing / License / Contact](#contributing--license--contact)
 
 ---
 
@@ -94,7 +93,7 @@ heyazhar-prefect-usage/
 
 ---
 
-# Quickstart — run examples locally
+# Quickstart
 
 After cloning the repo:
 
