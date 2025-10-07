@@ -1,37 +1,45 @@
-import time
+import asyncio
 from prefect import flow, task
 
-# Tasks for demo
+
 @task
-def greet_user(name: str):
-    time.sleep(2)  # Simulating a delay
+async def greet_user(name: str):
+    await asyncio.sleep(5)  # Simulating a delay
     return f"Hello, {name}!\n"
-    
+
+
 @task
-def provide_status_update(name: str):
-    time.sleep(3)  # Simulating a delay
+async def provide_status_update(name: str):
+    await asyncio.sleep(6)  # Simulating a delay
     return f"{name}, your current status is: Active\n"
-    
+
+
 @task
-def fetch_account_balance(name: str):
-    time.sleep(5)  # Simulating a longer delay
+async def fetch_account_balance(name: str):
+    await asyncio.sleep(7)  # Simulating a longer delay
     return f"{name}, your account balance is: $1,234.56\n"
 
 
 # Asynchronous Flow
 @flow
-def user_notification_async_flow(user_name: str):
+async def user_notification_async_flow(user_name: str):
     # Trigger the tasks to run in parallel (asynchronous execution)
-    greeting_task = greet_user.submit(user_name)  # .submit() allows tasks to run concurrently
-    status_task = provide_status_update.submit(user_name)
-    balance_task = fetch_account_balance.submit(user_name)
+    greeting_task = greet_user(user_name)
+    status_task = provide_status_update(user_name)
+    balance_task = fetch_account_balance(user_name)
 
-    # Collect the results once all tasks are complete
-    final_message = greeting_task.result() + status_task.result() + balance_task.result()
+    result = await asyncio.gather(
+        greet_user(user_name),
+        provide_status_update(user_name),
+        fetch_account_balance(user_name)
+    )
+
+    final_message = "".join(result)
     return final_message
+
 
 if __name__ == "__main__":
     # Asynchronous execution demo
     print("Asynchronous Flow (Tasks run in parallel):")
-    result_async = user_notification_async_flow("John")
+    result_async = asyncio.run(user_notification_async_flow("John"))
     print(result_async)
